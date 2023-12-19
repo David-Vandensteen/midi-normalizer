@@ -1,14 +1,14 @@
 export default class MidiNormalizer {
-  static controller(controller) {
-    if (controller >= 127) return 127;
-    if (controller <= 0) return 0;
-    return controller;
+  static controller(controller, { base } = { base: 0 }) {
+    if (controller >= 127 + base) return 127;
+    if (controller <= 0 + base) return 0;
+    return controller - base;
   }
 
-  static channel(channel) {
-    if (channel >= 15) return 15;
-    if (channel <= 0) return 0;
-    return channel;
+  static channel(channel, { base } = { base: 0 }) {
+    if (channel >= 15 + base) return 15;
+    if (channel <= 0 + base) return 0;
+    return channel - base;
   }
 
   static value(value) {

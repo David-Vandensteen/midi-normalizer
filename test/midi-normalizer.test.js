@@ -19,6 +19,11 @@ describe('MIDINormalizer', () => {
       const controller = 150;
       expect(MidiNormalizer.controller(controller)).to.equal(127);
     });
+
+    it('should return 127 if the controller value is 128 with base 1', () => {
+      const controller = 128;
+      expect(MidiNormalizer.controller(controller, { base: 1 })).to.equal(127);
+    });
   });
 
   describe('#channel()', () => {
@@ -35,6 +40,16 @@ describe('MIDINormalizer', () => {
     it('should return 15 if the channel value is greater than 15', () => {
       const channel = 20;
       expect(MidiNormalizer.channel(channel)).to.equal(15);
+    });
+
+    it('should return 0 if the channel value is 1 with base 1', () => {
+      const channel = 1;
+      expect(MidiNormalizer.channel(channel, { base: 1 })).to.equal(0);
+    });
+
+    it('should return 15 if the channel value is 16 with base 1', () => {
+      const channel = 16;
+      expect(MidiNormalizer.channel(channel, { base: 1 })).to.equal(15);
     });
   });
 
